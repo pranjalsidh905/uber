@@ -39,8 +39,19 @@ userSchema.methods.generateAuthToken = function () {
   return token;
 };
 
-userSchema.methods.comparePassword = async function (password) {
-  return await bcrypt.compare(password, this._password);
+// Hash the password before saving the user
+// userSchema.pre("save", async function (next) {
+//   if (!this.isModified("password")) return next();
+//   this.password = await bcrypt.hash(this.password, 10);
+//   next();
+// });
+
+// Compare input password with hashed password in the database
+userSchema.methods.comparePassword = async function (candidatePassword) {
+  if (!candidatePassword || !this.password) {
+    throw new Error("Password is missing or undefined");
+  }
+  return bcrypt.compare(candidatePassword, this.password);
 };
 userSchema.statics.hashPassword = async function (password) {
   return await bcrypt.hash(password, 10);
