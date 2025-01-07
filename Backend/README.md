@@ -91,6 +91,8 @@ Example:
 }
 ```
 
+
+
 # User Login Endpoint Documentation
 
 ## Endpoint: `/users/login`
@@ -263,6 +265,134 @@ Authorization: Bearer jwt_token_here
 #### Server Error (500):
 - **Description**: An error occurred on the server.
 - **Body**: A JSON object containing the error message.
+```json
+{
+  "error": "Internal Server Error"
+}
+```
+# Captain Registration Endpoint Documentation
+
+## Endpoint: `/captains/register`
+
+### Method: POST
+
+### Description:
+
+This endpoint is used to register a new captain. It requires the captain's first name, last name, email, password, and vehicle details.
+
+### Request Body:
+
+The request body should be a JSON object containing the following fields:
+
+- `first_name`: A string representing the captain's first name. It must be at least 3 characters long.
+- `last_name`: A string representing the captain's last name.
+- `email`: A string representing the captain's email. It must be a valid email address.
+- `password`: A string representing the captain's password. It must be at least 6 characters long.
+- `color`: A string representing the vehicle's color. It must be at least 3 characters long.
+- `model`: A string representing the vehicle's model. It must be at least 3 characters long.
+- `plate_number`: A string representing the vehicle's plate number. It must be at least 3 characters long.
+- `capacity`: An integer representing the vehicle's capacity. It must be at least 1.
+- `vehicle_type`: A string representing the vehicle type. It must be either "car", "auto", or "motorcycle".
+
+Example:
+
+```json
+{
+  "first_name": "John",
+  "last_name": "Doe",
+  "email": "john.doe@example.com",
+  "password": "password123",
+  "color": "red",
+  "model": "Toyota",
+  "plate_number": "XYZ123",
+  "capacity": 4,
+  "vehicle_type": "car"
+}
+```
+
+### Responses:
+
+#### Success (201):
+
+- **Description**: Captain successfully registered.
+- **Body**: A JSON object containing the captain details.
+
+```json
+{
+  "_id": "captain_id_here",
+  "fullname": {
+    "first_name": "John",
+    "last_name": "Doe"
+  },
+  "email": "john.doe@example.com",
+  "vehicle": {
+    "color": "red",
+    "model": "Toyota",
+    "plate_number": "XYZ123",
+    "capacity": 4,
+    "vehicle_type": "car"
+  }
+}
+```
+
+#### Validation Error (401):
+
+- **Description**: Validation failed for the input data.
+- **Body**: A JSON object containing the validation errors.
+
+```json
+{
+  "success": false,
+  "errors": [
+    {
+      "msg": "Invalid email",
+      "param": "email",
+      "location": "body"
+    },
+    {
+      "msg": "First name must be at least 3 characters long",
+      "param": "first_name",
+      "location": "body"
+    },
+    {
+      "msg": "Password must be at least 6 characters long",
+      "param": "password",
+      "location": "body"
+    },
+    {
+      "msg": "Color must be at least 3 characters long",
+      "param": "color",
+      "location": "body"
+    },
+    {
+      "msg": "Plate Number must be at least 3 characters long",
+      "param": "plate_number",
+      "location": "body"
+    },
+    {
+      "msg": "Model must be at least 3 characters long",
+      "param": "model",
+      "location": "body"
+    },
+    {
+      "msg": "Capacity must be at least 1",
+      "param": "capacity",
+      "location": "body"
+    },
+    {
+      "msg": "Vehicle type must be either car, auto, or motorcycle",
+      "param": "vehicle_type",
+      "location": "body"
+    }
+  ]
+}
+```
+
+#### Server Error (500):
+
+- **Description**: An error occurred on the server.
+- **Body**: A JSON object containing the error message.
+
 ```json
 {
   "error": "Internal Server Error"
