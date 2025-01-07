@@ -171,3 +171,100 @@ Example:
   "error": "Internal Server Error"
 }
 ```
+
+# User Profile Endpoint Documentation
+
+## Endpoint: `/users/profile`
+
+### Method: GET
+
+### Description:
+This endpoint is used to get the profile of the logged-in user. It requires the user to be authenticated.
+
+### Request Headers:
+- `Authorization`: A string containing the Bearer token.
+
+Example:
+```
+Authorization: Bearer jwt_token_here
+```
+
+### Responses:
+
+#### Success (200):
+- **Description**: User profile successfully retrieved.
+- **Body**: A JSON object containing the user details.
+```json
+{
+  "_id": "user_id_here",
+  "fullname": {
+    "first_name": "John",
+    "last_name": "Doe"
+  },
+  "email": "john.doe@example.com"
+}
+```
+
+#### Unauthorized (401):
+- **Description**: User is not authenticated.
+- **Body**: A JSON object containing the error message.
+```json
+{
+  "error": "Unauthorized"
+}
+```
+
+#### Server Error (500):
+- **Description**: An error occurred on the server.
+- **Body**: A JSON object containing the error message.
+```json
+{
+  "error": "Internal Server Error"
+}
+```
+
+# User Logout Endpoint Documentation
+
+## Endpoint: `/users/logout`
+
+### Method: GET
+
+### Description:
+This endpoint is used to log out the logged-in user. It requires the user to be authenticated.
+
+### Request Headers:
+- `Authorization`: A string containing the Bearer token.
+
+Example:
+```
+Authorization: Bearer jwt_token_here
+```
+
+### Responses:
+
+#### Success (200):
+- **Description**: User successfully logged out.
+- **Body**: A JSON object containing the success message.
+```json
+{
+  "message": "Logout successfully"
+}
+```
+
+#### Unauthorized (401):
+- **Description**: User is not authenticated.
+- **Body**: A JSON object containing the error message.
+```json
+{
+  "error": "Unauthorized"
+}
+```
+
+#### Server Error (500):
+- **Description**: An error occurred on the server.
+- **Body**: A JSON object containing the error message.
+```json
+{
+  "error": "Internal Server Error"
+}
+```
