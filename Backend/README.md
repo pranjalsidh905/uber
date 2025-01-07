@@ -398,3 +398,188 @@ Example:
   "error": "Internal Server Error"
 }
 ```
+
+# Captain Login Endpoint Documentation
+
+## Endpoint: `/captains/login`
+
+### Method: POST
+
+### Description:
+
+This endpoint is used to log in an existing captain. It requires the captain's email and password.
+
+### Request Body:
+
+The request body should be a JSON object containing the following fields:
+
+- `email`: A string representing the captain's email. It must be a valid email address.
+- `password`: A string representing the captain's password. It must be at least 6 characters long.
+
+Example:
+
+```json
+{
+  "email": "john.doe@example.com",
+  "password": "password123"
+}
+```
+
+### Responses:
+
+#### Success (200):
+
+- **Description**: Captain successfully logged in.
+- **Body**: A JSON object containing the authentication token and captain details.
+
+```json
+{
+  "token": "jwt_token_here",
+  "captain": {
+    "_id": "captain_id_here",
+    "fullname": {
+      "first_name": "John",
+      "last_name": "Doe"
+    },
+    "email": "john.doe@example.com"
+  }
+}
+```
+
+#### Validation Error (401):
+
+- **Description**: Validation failed for the input data.
+- **Body**: A JSON object containing the validation errors.
+
+```json
+{
+  "success": false,
+  "errors": [
+    {
+      "msg": "Invalid email",
+      "param": "email",
+      "location": "body"
+    },
+    {
+      "msg": "Password must be at least 6 characters long",
+      "param": "password",
+      "location": "body"
+    }
+  ]
+}
+```
+
+#### Server Error (500):
+
+- **Description**: An error occurred on the server.
+- **Body**: A JSON object containing the error message.
+
+```json
+{
+  "error": "Internal Server Error"
+}
+```
+
+# Captain Profile Endpoint Documentation
+
+## Endpoint: `/captains/profile`
+
+### Method: GET
+
+### Description:
+This endpoint is used to get the profile of the logged-in captain. It requires the captain to be authenticated.
+
+### Request Headers:
+- `Authorization`: A string containing the Bearer token.
+
+Example:
+```
+Authorization: Bearer jwt_token_here
+```
+
+### Responses:
+
+#### Success (200):
+- **Description**: Captain profile successfully retrieved.
+- **Body**: A JSON object containing the captain details.
+```json
+{
+  "_id": "captain_id_here",
+  "fullname": {
+    "first_name": "John",
+    "last_name": "Doe"
+  },
+  "email": "john.doe@example.com",
+  "vehicle": {
+    "color": "red",
+    "model": "Toyota",
+    "plate_number": "XYZ123",
+    "capacity": 4,
+    "vehicle_type": "car"
+  }
+}
+```
+
+#### Unauthorized (401):
+- **Description**: Captain is not authenticated.
+- **Body**: A JSON object containing the error message.
+```json
+{
+  "error": "Unauthorized"
+}
+```
+
+#### Server Error (500):
+- **Description**: An error occurred on the server.
+- **Body**: A JSON object containing the error message.
+```json
+{
+  "error": "Internal Server Error"
+}
+```
+
+# Captain Logout Endpoint Documentation
+
+## Endpoint: `/captains/logout`
+
+### Method: GET
+
+### Description:
+This endpoint is used to log out the logged-in captain. It requires the captain to be authenticated.
+
+### Request Headers:
+- `Authorization`: A string containing the Bearer token.
+
+Example:
+```
+Authorization: Bearer jwt_token_here
+```
+
+### Responses:
+
+#### Success (200):
+- **Description**: Captain successfully logged out.
+- **Body**: A JSON object containing the success message.
+```json
+{
+  "message": "Logout successful"
+}
+```
+
+#### Unauthorized (401):
+- **Description**: Captain is not authenticated.
+- **Body**: A JSON object containing the error message.
+```json
+{
+  "error": "Unauthorized"
+}
+```
+
+#### Server Error (500):
+- **Description**: An error occurred on the server.
+- **Body**: A JSON object containing the error message.
+```json
+{
+  "error": "Internal Server Error"
+}
+```
