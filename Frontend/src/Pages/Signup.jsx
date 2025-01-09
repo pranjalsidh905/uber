@@ -10,8 +10,11 @@ const Signup = () => {
     e.preventDefault();
     // console.log(email, password);
     setData({
-      firstName: firstName,
-      lastName: lastName,
+      username: {
+        firstName: firstName,
+        lastName: lastName,
+      },
+
       email: email,
       password: password,
     });
@@ -30,29 +33,31 @@ const Signup = () => {
           alt="Uber Logo"
         ></img>
         <form onSubmit={(e) => onSubmitHandler(e)}>
-          <h3 className="text-lg font-medium mb-2">FirstName</h3>
-          <input
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-            className="bg-[#eeeeee] mb-7 rounded px-4 py-2 border text-lg placeholder:text-base"
-            type="text"
-            required
-            placeholder="First"
-          />
-          <h3 className="text-lg font-medium mb-2">LastName</h3>
-          <input
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-            className="bg-[#eeeeee] mb-7 rounded px-4 py-2 border text-lg placeholder:text-base"
-            type="text"
-            required
-            placeholder="Last"
-          />
+          <h3 className="text-lg font-medium mb-2">What`s your Name</h3>
+          <div className="flex gap-4 mb-6">
+            <input
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              className="bg-[#eeeeee] w-1/2  rounded px-4 py-2 border text-lg placeholder:text-base"
+              type="text"
+              required
+              placeholder="FirstName"
+            />
+            {/* <h3 className="text-lg font-medium mb-2">LastName</h3> */}
+            <input
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              className="bg-[#eeeeee] w-1/2  rounded px-4 py-2 border text-lg placeholder:text-base"
+              type="text"
+              required
+              placeholder="LastName"
+            />
+          </div>
           <h3 className="text-lg font-medium mb-2">What your email</h3>
           <input
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="bg-[#eeeeee] mb-7 rounded px-4 py-2 w-full border text-lg placeholder:text-base"
+            className="bg-[#eeeeee] mb-6 rounded px-4 py-2 w-full border text-lg placeholder:text-base"
             type="email"
             required
             placeholder="your@email.com"
@@ -61,7 +66,7 @@ const Signup = () => {
           <input
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="bg-[#eeeeee] mb-7 rounded px-4 py-2 w-full border text-lg placeholder:text-base"
+            className="bg-[#eeeeee] mb-6 rounded px-4 py-2 w-full border text-lg placeholder:text-base"
             type="password"
             required
             placeholder="password"
@@ -71,20 +76,18 @@ const Signup = () => {
           </button>
         </form>
         <p className="text-center">
-          New hear?{" "}
-          <Link to="/signup" className="text-blue-500   ">
-            Create New Accoutn
+          Already have a account?{" "}
+          <Link to="/login" className="text-blue-500   ">
+            Login here
           </Link>
         </p>
       </div>
       <div>
-        <Link
-          to="/captain-Login"
-          className="bg-[#111] flex items-center justify-center text-white font-semibold mb-5 rounded px-4 py-2 w-full text-lg placeholder:text-base"
-        >
-          {" "}
-          Sign in as a Captain
-        </Link>
+        <p className="text-[10px] leading-tight">
+          This site is protected by reCAPTCHA and the{" "}
+          <span className="underline">Google Privacy Policy</span> and{" "}
+          <span className="underline">Terms of Service apply.</span>
+        </p>
       </div>
     </div>
   );
